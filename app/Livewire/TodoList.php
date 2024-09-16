@@ -13,10 +13,12 @@ class TodoList extends Component
  
     public function add()
     {
-        $this->todos[] = $this->todo;
+        // pull can reset and retrive in one operation
+        $this->todos[] = $this->pull('todo'); 
+        // $this->todos[] = $this->todo;
  
         // $this->todo = '';
-        $this->reset('todo');
+        // $this->reset('todo');
     }
  
     public function render()

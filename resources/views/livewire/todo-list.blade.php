@@ -1,21 +1,25 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
-    <div class="card mx-auto mt-5" style="width: 30rem;">
+    <div class="card mx-auto mt-5" style="width: 40rem;">
         <div class="card-header">
             <h5 class="card-title text-center">Todo List</h5>
         </div>
         <div class="card-body ">
-          <div class="row d-flex justify-content-between">
-            <input type="text" wire:model="todo" placeholder="Todo..." class="col-8"> 
+          <div class="row">
+            <input type="text" class="form-control" wire:model="todo"  placeholder="Todo...">
+
+            {{-- <input type="text" wire:model="todo" placeholder="Todo..." class="col-8">  --}}
      
-            <button wire:click="add" class=" btn btn-success col-3">Add Todo</button>
+            <button wire:click="add" class="col-3 btn btn-success">Add</button>
 
           </div>
 
           <ul class="list-group list-group-flush">
             
             @foreach ($todos as $todo)
+            @if($todo)
                 <li class="list-group-item">-{{ $todo }}</li>
+            @endif
             @endforeach
           </ul>       
         </div>
