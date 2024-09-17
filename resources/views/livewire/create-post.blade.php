@@ -12,7 +12,7 @@
             <h5 class="card-title text-center">Create Post</h5>
         </div>
         <div class="card-body ">
-            <form wire:submit="save">
+            <form wire:submit.prevent="save">
                 <label for="title">Post Title</label>
             <input type="text" class="form-control" wire:model="title"  placeholder="Post Title...">
             
@@ -26,6 +26,7 @@
      
             <div>
                 <button type="submit" class="col-3 btn btn-success">Add Post</button>
+                <span wire:loading>Saving...</span>
                 <button type="button" class="col-3 btn btn-success" wire:click="$refresh">Refresh</button>
                 
             </div>
