@@ -3,25 +3,25 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Post;
+use App\Models\Posts;
 
 class CreatePost extends Component
 {
     
     public $title;
-    public $body;
  
+    public $content;
+
     public function save() 
     {
-        $post = Post::create([
+        $post = Posts::create([
             'title' => $this->title,
-            'body' => $this->body
+            'content' => $this->content,
         ]);
  
         return redirect()->to('/posts')
              ->with('status', 'Post created!');
     }
-
     
     public function render()
     {

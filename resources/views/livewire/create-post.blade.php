@@ -1,22 +1,47 @@
+@assets
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+@endassets
+
+
 <div>
-    <h1>Create post page</h1>
-    <p>Care about people's approval and you will be their prisoner. </p>
+    {{-- The best athlete wants his opponent at his best. --}}
+    <div class="card mx-auto mt-5" style="width: 40rem;">
+        <div class="card-header">
+            <h5 class="card-title text-center">Create Post</h5>
+        </div>
+        <div class="card-body ">
+            <form wire:submit="save">
+                <label for="title">Post Title</label>
+            <input type="text" class="form-control" wire:model="title"  placeholder="Post Title...">
+            
+            
+            <div class="form-floating my-3">
+                <textarea class="form-control" wire:model="content"  id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Post Body</label>
+              </div>
 
-    <form wire:submit="save">
-        <div>
-            <label for="title">Title:</label>
+            {{-- <input type="text" wire:model="todo" placeholder="Todo..." class="col-8">  --}}
      
-            <input type="text" id="title" wire:model="title"> 
-        </div>
+            <div>
+                <button type="submit" class="col-3 btn btn-success">Add Post</button>
+                <button type="button" class="col-3 btn btn-success" wire:click="$refresh">Refresh</button>
+                
+            </div>
+            </form>
 
-        <div>
-            <label for="body">Body:</label>
+       
+
+               
+        </div>
+        <div class="card-footer">
+            &copy; All rights reserved @ 2024
+        </div>
+      </div>
+    <div>
+        
      
-            <input type="text" id="body" wire:model="body"> 
-        </div>
-        <div>
-            <button type="submit">Save</button>
-        </div>
-         
-    </form>
+        
+    </div>
 </div>
