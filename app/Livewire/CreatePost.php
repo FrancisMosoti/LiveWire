@@ -3,29 +3,37 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Livewire\Forms\PostForm;
 use Livewire\Attributes\Validate; 
+use Livewire\WithFileUploads;
 use App\Models\Posts;
 
 class CreatePost extends Component
 {
-    #[Validate('required')]
+    use WithFileUploads;
+    // public PostForm $form;
+    #[Validate('required', message: 'Please provide a title for the post!')]
     public $title;
  
     #[Validate('required')]
+    #[Validate('min:5', message:'Your post content is too short!')]
     public $content;
-
+    
+    #[Validate('required', message: 'Please Provide a photo for your post!')]
+    public $photo;
+    
+    
     public function save() 
     {
         $this->validate();
         
-        $post = Posts::create([
-            'title' => $this->title,
-            'content' => $this->content,
-        ]);
+        // $this->photo->store(path: 'photos');
+        
+        $post = Posts::create( $this->pull());
+        
         session()->flash('status', 'Post successfully updated.');
  
-        return redirect()->to('/posts')
-             ->with('status', 'Post created!');
+        return $this->redirect('/posts', navigate:true);
     }
     
     public function render()

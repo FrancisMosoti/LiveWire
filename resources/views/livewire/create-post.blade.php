@@ -14,12 +14,43 @@
         <div class="card-body ">
             <form wire:submit.prevent="save">
                 <label for="title">Post Title</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" wire:model="title"  placeholder="Post Title...">
-            @error('title') <p class="text-danger">{{ $message }}</p> @enderror 
+                <x-input name="title" type='text' wire:model.blur="title" id="title" class="form-control {{$errors->has('title')? 'is-invalid':'is-valid'}}" placeholder="Post Title..."/> 
+
+                    <div class="mb-3">
+                        
+                        <label for="formFile" class="form-label">Post Photo</label>
+                        <div>
+                            @if ($photo) 
+                            <img src="{{ $photo->temporaryUrl() }}" width="100px" height="100px">
+                        @endif
+                        </div>
+                        <div
+        x-data="{ uploading: false, progress: 0 }"
+        x-on:livewire-upload-start="uploading = true"
+        x-on:livewire-upload-finish="uploading = false"
+        x-on:livewire-upload-cancel="uploading = false"
+        x-on:livewire-upload-error="uploading = false"
+        x-on:livewire-upload-progress="progress = $event.detail.progress"
+    >
+
+
+                        <x-input class="form-control {{$errors->has('photo')? 'is-invalid':'is-valid'}}" wire:model.blur="photo" name="photo" type="file" id="formFile" />
+                            <!-- Progress Bar -->
+                            <div class="progress mt-2" x-show="uploading" role="progressbar" aria-label="Success example" aria-valuemin="0" aria-valuemax="100">
+                                <progress class="progress-bar bg-success"  max="100" x-bind:value="progress"></progress>
+                                {{-- <div class="progress-bar bg-success" max="100" x-bind:value="progress"></div> --}}
+                              </div>
+        {{-- <div x-show="uploading">
+            <progress max="100" x-bind:value="progress"></progress>
+        </div> --}}
+                            <div wire:loading wire:target="photo">Uploading...</div>
+                       
+                      </div>
+            
             
             
             <div class="form-floating my-3">
-                <textarea class="form-control  @error('content') is-invalid @enderror" wire:model="content"  id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea class="form-control  {{$errors->has('content')? 'is-invalid':'is-valid'}}" wire:model.blur="content"  id="floatingTextarea2" style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Post Body</label>
                 @error('content') <p class="text-danger">{{ $message }}</p> @enderror
               </div>

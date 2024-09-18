@@ -1,5 +1,5 @@
 <div >
-    @foreach ($posts as $post)
+    @forelse ($posts as $post)
     <div class="card text-center my-3 mx-auto" style="width: 30rem" wire:key="{{ $post->id }}">
     <div class="card-header">
       Featured
@@ -14,7 +14,13 @@
       2 days ago
     </div>
   </div>
-  @endforeach
+  @empty
+  <div class="text-danger text-center mt-5">
+    <h1 class="mx-auto">No posts available</h1>
+  </div>
+      
+  
+  @endforelse
 </div>
 
 @assets
